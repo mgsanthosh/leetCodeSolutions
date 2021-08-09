@@ -1,0 +1,57 @@
+2. Add Two Numbers
+
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+Solution:
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public int reverseInteger(int num) {
+        int reversed = 0;
+        while(num > 0) {
+            reversed = reversed * 10 + num % 10;
+            num = num / 10;
+        }
+      return reversed;
+    }
+    public int concatenate(ListNode list) {
+        int lSum = 0;
+        ListNode temp = list;
+        while(temp != null) {
+            if(temp !=  null)
+            lSum = (lSum * 10) + temp.val;
+            temp = temp.next;
+        }
+        
+   
+        return reverseInteger(lSum);
+    }
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        int l1Number = concatenate(l1);
+        int l2Number = concatenate(l2);
+        int sum = l1Number + l2Number;
+        int count = 0;
+        ListNode answerNode = new ListNode();
+       ListNode curr = answerNode;
+        if(sum == 0) {
+            curr.next = new ListNode(0);
+        }
+        while(sum > 0) {
+            curr.next = new ListNode(sum % 10);
+            curr = curr.next;
+            sum = sum / 10;
+        }
+        return answerNode.next;
+    }
+}
